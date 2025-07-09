@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple React Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+
+        const NavBar = () => (
+            <nav className="bg-white shadow-md py-4">
+                <div className="container mx-auto px-4 flex justify-between items-center">
+                    <div className="text-xl font-bold">My Blog</div>
+                    <ul className="hidden md:flex space-x-4">
+                        <li><a href="#" className="hover:text-blue-500">Home</a></li>
+                        <li><a href="#" className="hover:text-blue-500">Blog Categories</a></li>
+                        <li><a href="#" className="hover:text-blue-500">About Me</a></li>
+                    </ul>
+                    <div className="flex space-x-3">
+                        <a href="#" aria-label="Twitter" className="text-gray-500 hover:text-blue-500"><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.6c-.9.4-1.8.6-2.8.8 1-.6 1.7-1.4 2.1-2.5-.9.5-1.9.9-3 1.1C19.4 2.9 18.2 2 16.8 2c-2.6 0-4.6 2.2-4.1 4.7-3.5-.2-6.6-1.9-8.7-4.5C3 3.2 3.7 5.4 5.4 6.5c-.8 0-1.6-.2-2.3-.6-.1 2 1.5 3.9 3.5 4.3-.7.2-1.4.3-2.1.1.6 1.8 2.3 3.1 4.3 3.1C4.2 14 2.5 14.9 0 14.7c2.1 1.4 4.7 2.2 7.5 2.2 9 0 13.9-7.7 13.6-14.6.9-.7 1.7-1.6 2.3-2.6z"/></svg></a>
+                    </div>
+                </div>
+            </nav>
+        );
+
+        const MainBlogCard = () => (
+            <div className="bg-white rounded shadow-md overflow-hidden mb-6">
+                <img src="https://source.unsplash.com/900x400/?nature" alt="" className="w-full" />
+                <div className="p-4">
+                    <h2 className="text-2xl font-bold mb-2">Main Blog Post</h2>
+                    <p className="text-sm text-gray-500 mb-2">by John Doe - Jan 1, 2024</p>
+                    <p className="text-gray-700 mb-4">This is a short preview of the main blog content. It gives readers an idea of what the article is about.</p>
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Read More</button>
+                </div>
+            </div>
+        );
+
+        const SecondaryPost = ({ title }) => (
+            <div className="flex bg-white rounded shadow mb-4 overflow-hidden">
+                <img src="https://source.unsplash.com/150x150/?city" alt="" className="w-32 object-cover" />
+                <div className="p-4 flex flex-col justify-between">
+                    <div>
+                        <h3 className="font-bold text-lg mb-1">{title}</h3>
+                        <p className="text-xs text-gray-500 mb-2">by Jane Smith</p>
+                        <p className="text-gray-700 text-sm">Short preview of the blog post to entice users to continue reading.</p>
+                    </div>
+                    <a href="#" className="text-blue-500 text-sm hover:underline">Read More</a>
+                </div>
+            </div>
+        );
+
+        const AboutMe = () => (
+            <div className="bg-white p-4 rounded shadow mb-6 text-center">
+                <img src="https://source.unsplash.com/100x100/?portrait" className="rounded-full mx-auto mb-3" alt="avatar" />
+                <h3 className="font-bold mb-2">John Doe</h3>
+                <p className="text-sm text-gray-600 mb-2">Short bio about the author goes here.</p>
+                <div className="flex justify-center space-x-3">
+                    <a href="#" aria-label="Twitter" className="text-gray-500 hover:text-blue-500"><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.6c-.9.4-1.8.6-2.8.8 1-.6 1.7-1.4 2.1-2.5-.9.5-1.9.9-3 1.1C19.4 2.9 18.2 2 16.8 2c-2.6 0-4.6 2.2-4.1 4.7-3.5-.2-6.6-1.9-8.7-4.5C3 3.2 3.7 5.4 5.4 6.5c-.8 0-1.6-.2-2.3-.6-.1 2 1.5 3.9 3.5 4.3-.7.2-1.4.3-2.1.1.6 1.8 2.3 3.1 4.3 3.1C4.2 14 2.5 14.9 0 14.7c2.1 1.4 4.7 2.2 7.5 2.2 9 0 13.9-7.7 13.6-14.6.9-.7 1.7-1.6 2.3-2.6z"/></svg></a>
+                </div>
+            </div>
+        );
+
+        const Categories = () => (
+            <div className="bg-white p-4 rounded shadow mb-6">
+                <h3 className="font-bold mb-3">Categories</h3>
+                <ul className="space-y-2">
+                    <li><a href="#" className="hover:text-blue-500">Technology</a></li>
+                    <li><a href="#" className="hover:text-blue-500">Lifestyle</a></li>
+                    <li><a href="#" className="hover:text-blue-500">Travel</a></li>
+                </ul>
+            </div>
+        );
+
+        const Recommendations = () => (
+            <div className="bg-white p-4 rounded shadow mb-6">
+                <h3 className="font-bold mb-3">Today's Recommendations</h3>
+                <div className="flex mb-3">
+                    <img src="https://source.unsplash.com/80x80/?food" alt="" className="w-20 h-20 object-cover rounded" />
+                    <div className="ml-3">
+                        <p className="font-bold">Featured Content</p>
+                        <p className="text-sm text-gray-600">Short description of recommended content.</p>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const App = () => (
+            <div>
+                <NavBar />
+                <main className="container mx-auto px-4 mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div className="lg:col-span-2">
+                        <MainBlogCard />
+                        <SecondaryPost title="Secondary Post One" />
+                        <SecondaryPost title="Secondary Post Two" />
+                    </div>
+                    <aside>
+                        <AboutMe />
+                        <Categories />
+                        <Recommendations />
+                    </aside>
+                </main>
+            </div>
+        );
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
